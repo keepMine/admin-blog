@@ -5,6 +5,7 @@
 
 - 技术栈：Vue.js, Vuex, vue-router
 - UI 框架：Element-UI
+s
 ## 安装启动
 ```
 # 安装包
