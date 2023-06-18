@@ -104,8 +104,9 @@ export default {
         status: 1,
         sort_order: 1,
         admin_id: '',
-        category_id: 1,
-        content: ''
+        category_id: '',
+        content: '',
+        created_time: ''
       },
       rules: {
         title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }],
@@ -198,6 +199,7 @@ export default {
         this.listLoading = true
         const res = await list()
         this.categoryList = res.data.data
+        this.ruleForm.category_id = this.categoryList[0].id
       } catch (err) {
         console.log(err)
       } finally {

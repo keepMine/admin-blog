@@ -19,7 +19,7 @@ export function create(data) {
 // 获取文章详情
 export function detail(data) {
   return request({
-    url: '/article/' + data.id,
+    url: '/article/detail/' + data.id,
     method: 'get',
     data
   })
@@ -28,7 +28,7 @@ export function detail(data) {
 // 更新文章
 export function update(data) {
   return request({
-    url: '/article/' + data.id,
+    url: '/article/update/' + data.id,
     method: 'put',
     data
   })
@@ -37,7 +37,7 @@ export function update(data) {
 // 删除文章
 export function detele(data) {
   return request({
-    url: '/article/' + data.id,
+    url: '/article/delete/' + data.id,
     method: 'delete',
     data
   })

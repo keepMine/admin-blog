@@ -13,25 +13,22 @@
       <el-form-item label="描述" prop="description">
         <el-input v-model="ruleForm.description" />
       </el-form-item>
-      <el-form-item label="图片" prop="img_url">
-        <el-input v-model="ruleForm.img_url" />
-      </el-form-item>
       <el-form-item label="SEO关键字" prop="seo_keyword">
         <el-input v-model="ruleForm.seo_keyword" />
       </el-form-item>
-      <el-form-item label="图片" prop="img_url">
+      <el-form-item label="图片" prop="image_url">
         <el-upload
           class="avatar-uploader"
-          action="https://upload-z2.qiniup.com/"
+          action="https://upload-z1.qiniup.com"
           :show-file-list="false"
           :data="{ token }"
           :on-success="handleUploadSuccess"
         >
           <img
-            v-if="ruleForm.img_url"
+            v-if="ruleForm.image_url"
             width="80"
             height="80"
-            :src="ruleForm.img_url"
+            :src="ruleForm.image_url"
             class="avatar"
           >
           <i v-else class="el-icon-plus avatar-uploader-icon" />
@@ -53,9 +50,18 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="发布时间" prop="created_time">
+        <el-date-picker
+          v-model="ruleForm.created_time"
+          type="date"
+          placeholder="选择日期"
+        />
+      </el-form-item>
+
       <el-form-item label="排序" prop="sort_order">
         <el-input v-model="ruleForm.sort_order" />
       </el-form-item>
+
       <el-form-item label="内容" prop="content">
         <mavon-editor
           ref="md"
@@ -71,7 +77,7 @@
         <el-button
           type="primary"
           @click="submitForm('ruleForm')"
-        >立即更新</el-button>
+        >立即创建</el-button>
       </el-form-item>
     </el-form>
   </section>
@@ -94,20 +100,21 @@ export default {
         id: this.$route.query.id,
         title: '',
         description: '',
-        img_url: '',
+        image_url: '',
         seo_keyword: '',
         status: 1,
         sort_order: 1,
         admin_id: '',
         category_id: '',
-        content: ''
+        content: '',
+        created_time: ''
       },
       rules: {
         title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }],
         description: [
           { required: true, message: '请输入文章描述', trigger: 'blur' }
         ],
-        img_url: [
+        image_url: [
           { required: true, message: '请输入图片链接', trigger: 'blur' }
         ],
         seo_keyword: [
@@ -121,6 +128,9 @@ export default {
         ],
         category_id: [
           { required: true, message: '请选择分类', trigger: 'blur' }
+        ],
+        created_time: [
+          { required: true, message: '请选择分布时间', trigger: 'blur' }
         ],
         content: [{ required: true, message: '请输入内容', trigger: 'blur' }]
       }
@@ -159,13 +169,14 @@ export default {
         })
         this.ruleForm.title = res.data.title
         this.ruleForm.description = res.data.description
-        this.ruleForm.img_url = res.data.img_url
+        this.ruleForm.image_url = res.data.image_url
         this.ruleForm.content = res.data.content
         this.ruleForm.seo_keyword = res.data.seo_keyword
         this.ruleForm.status = res.data.status
         this.ruleForm.sort_order = res.data.sort_order
         this.ruleForm.category_id = res.data.category_info.id
         this.ruleForm.content = res.data.content
+        this.ruleForm.created_time = res.data.created_time
         this.ruleForm.admin_id =
           (this.adminInfo && this.adminInfo.id) || res.data.adminInfo.id
       } catch (err) {
@@ -174,7 +185,7 @@ export default {
     },
     // 图片上传成功回调
     handleUploadSuccess(file) {
-      this.ruleForm.img_url = `https://cdn.boblog.com/${file.key}`
+      this.ruleForm.image_url = `https://cdn.boblog.com/${file.key}`
       this.$message.success('上传成功!')
     },
     $imgDel(pos, $file) {
@@ -199,8 +210,8 @@ export default {
         data: formdata,
         headers: { 'Content-Type': 'multipart/form-data' }
       }).then((res) => {
-        const img_url = `https://cdn.boblog.com/${res.data.key}`
-        this.$refs.md.$img2Url(pos, img_url)
+        const image_url = `https://cdn.boblog.com/${res.data.key}`
+        this.$refs.md.$img2Url(pos, image_url)
         loading.close()
       }).catch(err => {
         console.log(err)

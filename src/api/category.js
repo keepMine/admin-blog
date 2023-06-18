@@ -21,7 +21,7 @@ export function create(data) {
 // 获取分类详情
 export function detail(data) {
   return request({
-    url: '/category/' + data.id,
+    url: '/category/detail/' + data.id,
     method: 'get',
     data
   })
@@ -30,7 +30,7 @@ export function detail(data) {
 // 更新分类
 export function update(data) {
   return request({
-    url: '/category/' + data.id,
+    url: '/category/update/' + data.id,
     method: 'put',
     data
   })
@@ -39,7 +39,7 @@ export function update(data) {
 // 删除分类
 export function detele(data) {
   return request({
-    url: '/category/' + data.id,
+    url: '/category/delete/' + data.id,
     method: 'delete',
     data
   })
