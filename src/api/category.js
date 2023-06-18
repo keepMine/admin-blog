@@ -1,18 +1,18 @@
 import request from '@/utils/request'
 
 // 获取分类列表
-export function list(params) {
+export function list(data) {
   return request({
-    url: '/category',
-    method: 'get',
-    params
+    url: '/category/list',
+    method: 'post',
+    data
   })
 }
 
 // 创建分类
 export function create(data) {
   return request({
-    url: '/category',
+    url: '/category/create',
     method: 'post',
     data
   })

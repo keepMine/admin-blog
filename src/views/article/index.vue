@@ -85,11 +85,11 @@
             <img :src="scope.row.image_url" width="80" height="80" alt="">
           </template>
         </el-table-column>
-        <!-- <el-table-column label="分类" align="center">
+        <el-table-column label="分类" align="center">
           <template slot-scope="scope">
-            {{ scope.row.category_info.name }}
+            {{ scope.row.category_id }}
           </template>
-        </el-table-column> -->
+        </el-table-column>
         <el-table-column label="创建时间" align="center">
           <template slot-scope="scope">
             {{ scope.row.created_time }}
@@ -192,7 +192,7 @@ export default {
   },
   mounted() {
     this.getArticleList()
-    // this.getCategoryList()
+    this.getCategoryList()
   },
   methods: {
     create() {

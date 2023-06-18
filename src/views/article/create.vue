@@ -40,7 +40,7 @@
           <el-radio :label="0">隐藏</el-radio>
         </el-radio-group>
       </el-form-item>
-      <!-- <el-form-item label="分类" prop="category_id">
+      <el-form-item label="分类" prop="category_id">
         <el-select v-model="ruleForm.category_id" placeholder="请选择分类">
           <el-option
             v-for="item in categoryList"
@@ -49,7 +49,7 @@
             :value="item.id"
           />
         </el-select>
-      </el-form-item> -->
+      </el-form-item>
       <el-form-item label="发布时间" prop="created_time">
         <el-date-picker
           v-model="ruleForm.created_time"
@@ -104,7 +104,7 @@ export default {
         status: 1,
         sort_order: 1,
         admin_id: '',
-        category_id: '1',
+        category_id: 1,
         content: ''
       },
       rules: {
@@ -144,7 +144,7 @@ export default {
   mounted() {
     this.$axios = axios.create({ withCredentials: false })
     this.getUploadToken()
-    // this.getCategoryList()
+    this.getCategoryList()
   },
   methods: {
     // 获取上传token
